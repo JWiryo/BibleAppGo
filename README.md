@@ -1,4 +1,4 @@
-#Bible Verse Of The Day Program
+# Bible Verse Of The Day Program
 
 ## Purpose
 

@@ -1,12 +1,15 @@
 package main
 
 import (
+	constants "bibleAppGo/constants"
+
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
 	"log"
 	"net/http"
 	"os"
+	"time"
 )
 
 // VerseOfTheDay Struct
@@ -24,9 +27,12 @@ type Verse struct {
 func callBibleVerseOfDay() VerseOfTheDay {
 	client := &http.Client{}
 
-	req, err := http.NewRequest("GET", "https://developers.youversionapi.com/1.0/verse_of_the_day/1?version_id=1", nil)
+	t := time.Now().YearDay
+	todayAPIURL := fmt.Sprintf(constants.APIURL, t())
+
+	req, err := http.NewRequest("GET", todayAPIURL, nil)
 	req.Header.Set("accept", "application/json")
-	req.Header.Set("x-youversion-developer-token", "Your-API-Key-Here")
+	req.Header.Set("x-youversion-developer-token", constants.BibleAPIKey) // You can replace this with your API Key
 
 	if err != nil {
 		fmt.Print(err.Error())
